@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storage, db } from '../firebase'; // Ensure this path is correct
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Navbar from './navbar';
 
@@ -12,6 +12,7 @@ function UploadImage() {
     const [age, setAge] = useState('');
     const [add, setAdd] = useState('');
     const [date, setDate] = useState('');
+    const navigate = useNavigate();
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -33,6 +34,7 @@ function UploadImage() {
             imgUrl: downloadURL,
         });
 
+        navigate('/showing')
         alert('Image uploaded successfully');
     };
 
